@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+
+#app {
+  @apply text-indigo-500;
+}
+
+@tailwind utilities;

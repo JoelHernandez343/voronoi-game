@@ -1,11 +1,11 @@
 import express from 'express';
 import cors from 'cors';
 
-import { dirname } from 'path';
+import path from 'path';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const __dirname = path.dirname(__filename);
 
 class Server {
   constructor() {
@@ -17,9 +17,9 @@ class Server {
   }
 
   routes() {
-    this.app.get('/', (req, res) =>
-      res.sendFile(`${__dirname}/public/index.html`)
-    );
+    this.app.use(express.static(path.join(__dirname, '../public')));
+
+    this.app.get('/', (req, res) => res.sendFile('public/index.html'));
 
     this.app.get('/api/', (req, res) => res.send({ ans: 'fuck u' }));
   }

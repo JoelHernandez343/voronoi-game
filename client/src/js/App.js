@@ -1,5 +1,4 @@
-import React from 'react';
-
+import '../css/App.css';
 import MainButton from './components/main-button.js';
 
 const App = () => (

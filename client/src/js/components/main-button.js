@@ -1,5 +1,3 @@
-import React from 'react';
-
 const MainButton = props => {
   console.log(props);
 

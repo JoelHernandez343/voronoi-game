@@ -1,13 +1,26 @@
 import '../css/App.css';
-import MainButton from './components/main-button.js';
+import '../css/fonts.css';
+
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
+import Home from './pages/Home.js';
 
 const App = () => (
-  <div>
-    <h1>Welcolme world from Reacssst!</h1>
-    <MainButton>
-      <p>Hello world</p>
-    </MainButton>
-  </div>
+  <Router>
+    <div>
+      <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route path="/about">
+          <p>This is about</p>
+        </Route>
+        <Route path="/*">
+          <p>This is 404</p>
+        </Route>
+      </Switch>
+    </div>
+  </Router>
 );
 
 export default App;

@@ -1,0 +1,37 @@
+.home {
+  height: 100vh;
+  width: 100vw;
+  background: rgb(0, 212, 255);
+  background: linear-gradient(
+    117deg,
+    rgba(0, 212, 255, 1) 20%,
+    rgba(4, 132, 202, 1) 59%,
+    rgba(7, 52, 149, 1) 91%,
+    rgba(9, 9, 121, 1) 100%
+  );
+}
+
+.home-bg {
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  z-index: 1;
+}
+
+.home-bg-world {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(0%, -50%);
+}
+
+img.reference {
+  opacity: 0;
+}
+
+.home-content {
+  position: relative;
+  z-index: 4;
+}

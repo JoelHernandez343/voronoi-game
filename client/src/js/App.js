@@ -3,7 +3,7 @@ import '../css/fonts.css';
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import Home from './pages/Home.js';
+import Home from './pages/home/Home.js';
 
 const App = () => (
   <Router>

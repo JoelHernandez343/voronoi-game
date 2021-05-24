@@ -4,32 +4,34 @@ import * as images from '../imports/images.js';
 
 import { docquery } from '../tools/index.js';
 
-const ParallaxImage = ({ image, factor }) => {
+const ParallaxImage = ({ image, factor, customClass = '' }) => {
+  const className = customClass || `home-bg-${image}`;
+
   useEffect(() => {
-    const trackingMove = createTrackingMove(image, factor);
+    const trackingMove = createTrackingMove(factor, className);
 
     window.addEventListener('mousemove', trackingMove);
 
     return () => {
       window.removeEventListener('mousemove', trackingMove);
     };
-  }, [image, factor]);
+  }, [image, factor, className]);
 
   return (
     <div>
-      <img
-        src={images[image]}
-        alt=""
-        className={`home-bg-${image} reference`}
-      />
-      <img src={images[image]} alt="" className={`home-bg-${image} movable`} />
+      <img src={images[image]} alt="" className={`${className} reference`} />
+      <img src={images[image]} alt="" className={`${className} movable`} />
     </div>
   );
 };
 
-const createTrackingMove = (name, factor) => e => {
-  const movable = docquery(`.home-bg-${name}.movable`);
-  const reference = docquery(`.home-bg-${name}.reference`);
+const createTrackingMove = (factor, className) => e => {
+  if (window.innerWidth < 767) {
+    return;
+  }
+
+  const movable = docquery(`.${className}.movable`);
+  const reference = docquery(`.${className}.reference`);
 
   const { x, y, height, width } = reference.getBoundingClientRect();
 

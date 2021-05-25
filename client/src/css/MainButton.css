@@ -1,4 +1,4 @@
-.bttn {
+.mainbttn {
   margin: 0 0 6px;
   border-radius: 7px;
   box-shadow: 0px 6px 0px 0px #1d1e22;
@@ -6,15 +6,15 @@
   background: #1d1e2288;
 }
 
-.bttn:hover {
+.mainbttn:hover {
   background: #3f404288;
 }
 
-.bttn:active {
+.mainbttn:active {
   box-shadow: 0px 2px 0px 0px black;
   margin: 4px 0 2px;
 }
 
-.bttn:focus {
+.mainbttn:focus {
   outline: none;
 }

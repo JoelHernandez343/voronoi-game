@@ -11,71 +11,19 @@
   );
 }
 
-.home-bg {
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 100vw;
-  position: fixed;
-  z-index: 1;
-}
-
-img.reference {
-  opacity: 0;
-}
-
-.home-content {
+.home-sections {
   position: relative;
   z-index: 4;
   background: #1d1e22bb;
   box-shadow: 0 4px 30px rgb(0 0 0 / 50%);
+  @apply text-lg text-gray-100 h-screen md:h-auto md:backdrop-filter md:backdrop-blur-lg p-12 md:rounded-lg md:max-w-3xl md:mx-6 md:top-1/4;
 }
 
-.home-bg-earth {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(0%, -50%);
+.home-section-left {
+  left: 0;
+  transition: left 1s ease-in-out;
 }
 
-.home-bg-cloud01 {
-  position: absolute;
-  right: 10%;
-  top: 10%;
-  height: 100px;
-}
-
-.home-bg-cloud02 {
-  position: absolute;
-  right: 20%;
-  top: 50%;
-  height: 150px;
-}
-
-.home-bg-cloud03 {
-  position: absolute;
-  right: 40%;
-  top: 70%;
-  height: 125px;
-}
-
-.home-bg-cloud04 {
-  position: absolute;
-  right: 55%;
-  top: 40%;
-  height: 100px;
-}
-
-.home-bg-swords {
-  position: absolute;
-  right: 50%;
-  top: 50%;
-  height: 95px;
-}
-
-.home-bg-shield {
-  position: absolute;
-  right: 10%;
-  top: 40%;
-  height: 90px;
+.home-section-move-to-left {
+  left: -100%;
 }

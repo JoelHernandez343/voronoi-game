@@ -1,3 +1,4 @@
+import '../../../css/HomeBg.css';
 import ParallaxImage from '../../components/ParallaxImage.js';
 
 const HomeBg = () => (

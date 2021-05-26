@@ -53,7 +53,7 @@ const VerticalNavBar = ({ states }) => {
 };
 
 const VerticalLink = ({ pathname, route, icon, title, onClick }) => (
-  <li className="vnavb-link flex" onClick={onClick}>
+  <li className="vnavb-link flex ease-in-out duration-150" onClick={onClick}>
     <Link to={route} className="flex-grow flex items-center space-x-4 p-2 h-12">
       <span className="material-icon text-3xl w-8">
         {pathname === route ? icon : ''}

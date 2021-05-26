@@ -2,22 +2,31 @@ import '../../../css/SelectSection.css';
 import MainButton from '../../components/MainButton.js';
 
 const SelectSection = ({ states }) => {
+  const [, setMovingRight] = states.movingRight;
   const [, setSection] = states.section;
+
+  const createGame = () => {
+    setMovingRight(true);
+    setSection('create');
+  };
+
+  const joinGame = () => {
+    setMovingRight(true);
+    setSection('join');
+  };
 
   return (
     <div className="w-full flex-grow-0 flex-shrink-0">
-      <h2 className="text-3xl font-bold">Conquista el</h2>
-      <h1 className="text-8xl font-bold -m-1.5">Mundo</h1>
-      <p>Bienvenido, seleccione alguna opción</p>
-      <p className="mb-3"></p>
-      <div className="flex space-x-3 justify-center md:justify-start">
-        <MainButton icon="sports_esports" onClick={() => setSection('create')}>
+      <p>
+        Puedes crear una nueva partida e invitar a un amigo o unirte a una
+        partida a la que te hayan invitado!
+      </p>
+      <p className="mb-4"></p>
+      <div className="flex space-x-3 justify-center py-10">
+        <MainButton icon="sports_esports" onClick={createGame}>
           Crear juego
         </MainButton>
-        <MainButton
-          icon="supervised_user_circle"
-          onClick={() => setSection('join')}
-        >
+        <MainButton icon="supervised_user_circle" onClick={joinGame}>
           Unirse a partida
         </MainButton>
       </div>

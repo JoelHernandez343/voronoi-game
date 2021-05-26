@@ -5,6 +5,14 @@
   width: 100vw;
   position: fixed;
   z-index: 1;
+  background: rgb(0, 212, 255);
+  background: linear-gradient(
+    117deg,
+    rgba(0, 212, 255, 1) 20%,
+    rgba(4, 132, 202, 1) 59%,
+    rgba(7, 52, 149, 1) 91%,
+    rgba(9, 9, 121, 1) 100%
+  );
 }
 
 img.reference {
@@ -41,15 +49,15 @@ img.reference {
 
 .home-bg-cloud04 {
   position: absolute;
-  right: 55%;
-  top: 40%;
+  right: 35%;
+  top: 20%;
   height: 100px;
 }
 
 .home-bg-swords {
   position: absolute;
-  right: 50%;
-  top: 50%;
+  right: 20%;
+  top: 20%;
   height: 95px;
 }
 

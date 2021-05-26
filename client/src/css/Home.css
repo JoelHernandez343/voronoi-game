@@ -1,29 +1,22 @@
 .home {
   height: 100vh;
-  width: 100vw;
-  background: rgb(0, 212, 255);
-  background: linear-gradient(
-    117deg,
-    rgba(0, 212, 255, 1) 20%,
-    rgba(4, 132, 202, 1) 59%,
-    rgba(7, 52, 149, 1) 91%,
-    rgba(9, 9, 121, 1) 100%
-  );
+}
+
+.home-description {
+  position: relative;
+  z-index: 4;
 }
 
 .home-sections {
-  position: relative;
-  z-index: 4;
   background: #1d1e22bb;
   box-shadow: 0 4px 30px rgb(0 0 0 / 50%);
-  @apply text-lg text-gray-100 h-screen md:h-auto md:backdrop-filter md:backdrop-blur-lg p-12 md:rounded-lg md:max-w-3xl md:mx-6 md:top-1/4;
 }
 
-.home-section-left {
+.home-section-original {
   left: 0;
-  transition: left 1s ease-in-out;
+  transition: left 0.5s ease-in;
 }
 
-.home-section-move-to-left {
+.home-section-move-to-right {
   left: -100%;
 }

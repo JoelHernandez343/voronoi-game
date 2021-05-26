@@ -1,0 +1,9 @@
+.input {
+  outline: none;
+  box-shadow: 0px 6px 0px 0px #1d1e22;
+  background: #1d1e2288;
+}
+
+.input:focus {
+  background: #3f404288;
+}

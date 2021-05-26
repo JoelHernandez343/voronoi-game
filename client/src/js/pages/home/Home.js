@@ -19,9 +19,9 @@ const Home = () => {
 
   return (
     <div className="home flex items-center">
-      <div className="home-description quicksand text-lg text-gray-100 min-h-screen md:min-h-0 lg:pl-52 lg:max-w-3xl">
-        <div className="p-10 lg:p-0">
-          <p className="text-9xl text-center mt-16">
+      <div className="home-description quicksand text-lg w-full text-gray-100 min-h-screen md:min-h-0 lg:pl-52 lg:max-w-3xl">
+        <div className="pb-10 px-10 pt-60 md:pt-10 lg:p-0">
+          <p className="text-6xl md:text-9xl text-center">
             <span className="material-icon">local_police</span>
           </p>
 

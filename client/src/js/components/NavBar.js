@@ -4,10 +4,6 @@ import { github } from '../imports/images.js';
 const NavBar = () => {
   const { pathname } = useLocation();
 
-  if (pathname === '/loading') {
-    return null;
-  }
-
   return (
     <nav className="fixed z-10 w-full hidden md:block">
       <ul className="flex space-x-24 justify-end items-center py-5 pr-24 quicksand font-semibold text-gray-200">

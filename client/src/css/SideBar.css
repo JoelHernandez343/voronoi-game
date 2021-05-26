@@ -1,0 +1,13 @@
+.sb {
+  transition: right 0.3s cubic-bezier(1, 0, 0, 1),
+    left 0.3s cubic-bezier(1, 0, 0, 1);
+  background: #1d1e22bb;
+}
+
+.sb-move-to-right {
+  left: 0;
+}
+
+.sb-move-to-left {
+  right: 0;
+}

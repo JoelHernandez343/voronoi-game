@@ -5,5 +5,6 @@ import cloud03 from '../../assets/cloud03.png';
 import cloud04 from '../../assets/cloud04.png';
 import swords from '../../assets/swords.png';
 import shield from '../../assets/shield.png';
+import github from '../../assets/GitHub-Mark-Light-32px.png';
 
-export { earth, cloud01, cloud02, cloud03, cloud04, swords, shield };
+export { earth, cloud01, cloud02, cloud03, cloud04, swords, shield, github };

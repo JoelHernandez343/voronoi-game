@@ -9,7 +9,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-import { ioConfig } from './io';
+import { ioConfig } from './io.js';
 
 class Server {
   constructor() {
@@ -17,7 +17,7 @@ class Server {
     this.server = http.createServer(this.app);
     this.io = new SocketServer(this.server);
 
-    this.PORT = process.env.PORT;
+    this.PORT = process.env.PORT || 3000;
 
     this.middlewares();
     this.routes();

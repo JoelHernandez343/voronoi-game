@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import Server from './js/server.js';
 
-dotenv.config(process.env);
+dotenv.config();
 
 const server = new Server();
 server.listen();

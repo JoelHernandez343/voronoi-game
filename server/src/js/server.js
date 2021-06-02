@@ -1,5 +1,7 @@
 import express from 'express';
 import cors from 'cors';
+import { Server as SocketServer } from 'socket.io';
+import http from 'http';
 
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -7,13 +9,22 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+import { ioConfig } from './io';
+
 class Server {
   constructor() {
     this.app = express();
+    this.server = http.createServer(this.app);
+    this.io = new SocketServer(this.server);
+
     this.PORT = process.env.PORT;
 
     this.middlewares();
     this.routes();
+  }
+
+  ioConfig() {
+    ioConfig(this.io);
   }
 
   routes() {
@@ -30,7 +41,7 @@ class Server {
   }
 
   listen() {
-    this.app.listen(this.PORT, () =>
+    this.server.listen(this.PORT, () =>
       console.log(`Listening to port ${this.PORT}`)
     );
   }

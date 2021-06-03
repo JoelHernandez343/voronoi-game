@@ -21,6 +21,7 @@ class Server {
 
     this.middlewares();
     this.routes();
+    this.ioConfig();
   }
 
   ioConfig() {

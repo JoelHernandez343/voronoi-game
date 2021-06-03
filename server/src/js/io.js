@@ -1,9 +1,6 @@
-import { Server } from 'socket.io';
+import { bindGameEvents } from './game-connection.js';
 
-const ioConfig = (io = new Server()) => {
-  io.on('connection', socket => {
-    console.log('Someone has connected son!');
-  });
-};
+const ioConfig = io =>
+  io.on('connection', socket => bindGameEvents(io, socket));
 
 export { ioConfig };

@@ -17,6 +17,8 @@ class Server {
     this.server = http.createServer(this.app);
     this.io = new SocketServer(this.server);
 
+    this.rooms = {};
+
     this.PORT = process.env.PORT || 3000;
 
     this.middlewares();
@@ -25,7 +27,7 @@ class Server {
   }
 
   ioConfig() {
-    ioConfig(this.io);
+    ioConfig(this.io, this.rooms);
   }
 
   routes() {

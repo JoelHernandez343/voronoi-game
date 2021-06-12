@@ -13,7 +13,7 @@ const attackRadius = [20, 50, 30, 60];
 const blockRadius = [30, 15, 10, 10];
 
 class Site {
-  static build(type, owner, x, y) {
+  static build(type, owner, point) {
     const s = sites[type];
 
     return new Site({
@@ -22,12 +22,8 @@ class Site {
       health: health[s],
       attackRadius: attackRadius[s],
       blockRadius: blockRadius[s],
-      owner: {
-        socketId: owner.socketId,
-        name: owner.name,
-      },
-      x,
-      y,
+      owner,
+      point,
     });
   }
 
@@ -35,20 +31,19 @@ class Site {
     attack,
     health,
     attackRadius,
-    blockRadius,
+    quarantineRadius,
     type,
     owner,
-    x,
-    y,
+    point,
   }) {
     this.attack = attack;
     this.health = health;
     this.attackRadius = attackRadius;
-    this.blockRadius = blockRadius;
+    this.quarantineRadius = quarantineRadius;
     this.type = type;
     this.owner = owner;
     this.isDestroyed = false;
-    this.point = { x, y };
+    this.point = point;
   }
 
   reduceHealth(damage) {
@@ -64,6 +59,20 @@ class Site {
     const area = calcArea(points);
 
     return area;
+  }
+
+  isInQuarantineZone({ x, y }) {
+    return (
+      (x - this.point.x) ** 2 + (y - this.point.y) ** 2 <=
+      this.quarantineRadius ** 2
+    );
+  }
+
+  isInAttactZone({ x, y }) {
+    return (
+      (x - this.point.x) ** 2 + (y - this.point.y) ** 2 <=
+      this.attackRadius ** 2
+    );
   }
 }
 

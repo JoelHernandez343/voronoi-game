@@ -44,6 +44,7 @@ class Site {
     this.owner = owner;
     this.isDestroyed = false;
     this.point = point;
+    this.area = -1;
   }
 
   reduceHealth(damage) {
@@ -53,12 +54,12 @@ class Site {
     }
   }
 
-  getArea(voronoi, sites) {
-    const index = getCellIndex(this.point, voronoi, sites);
+  calcArea(voronoi, sitesLength) {
+    const index = getCellIndex(this.point, voronoi, sitesLength);
     const points = getCellPoints(index, voronoi);
     const area = calcArea(points);
 
-    return area;
+    this.area = area;
   }
 
   isInQuarantineZone({ x, y }) {
@@ -68,7 +69,7 @@ class Site {
     );
   }
 
-  isInAttactZone({ x, y }) {
+  isInAttackZone({ x, y }) {
     return (
       (x - this.point.x) ** 2 + (y - this.point.y) ** 2 <=
       this.attackRadius ** 2

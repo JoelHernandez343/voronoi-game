@@ -1,5 +1,6 @@
 import { Player } from './Player.js';
 import { Site } from './Site.js';
+import { getVoronoi } from './voronoi.js';
 
 class Room {
   constructor() {
@@ -44,7 +45,7 @@ class Room {
     }
   }
 
-  _sitePlacement({ site, point }) {
+  _sitePlacement({ site, location }) {
     const currentPlayer = this.players[this.playerInTurn];
 
     // Check if the player still has sites available of the type
@@ -55,19 +56,21 @@ class Room {
     }
 
     // Check if the site is placed in a quarentine free zone
-    if (this.sites.find(site => site.isInQuarantineZone(point))) {
+    if (this.sites.find(site => site.isInQuarantineZone(location))) {
       return this._error(
-        `This site: ${site} with this coordinates: ${point} is being placed in a quarantine zone`
+        `This site: ${site} with this coordinates: ${location} is being placed in a quarantine zone`
       );
     }
 
     // Add the site in sites
-    this.sites.push(Site.build(site, currentPlayer, point));
+    this.sites.push(Site.build(site, currentPlayer, location));
   }
 
   _siteAttack({ attackedSite, attackingSite }) {}
 
-  _recalculateVoronoi() {}
+  _recalculateVoronoi() {
+    const voronoi = getVoronoi(this.sites, [0, 0, 100, 100]);
+  }
 
   _error(error = '') {
     return { error: error };

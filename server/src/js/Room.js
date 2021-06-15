@@ -52,7 +52,16 @@ class Room {
 
   disconnectPlayer(socketId) {
     const index = this.players.findIndex(p => p.socketId === socketId);
-    this.players.splice(index, 1);
+    const [playerDisconnected] = this.players.splice(index, 1);
+
+    this.turns = 0;
+    this.finished = true;
+
+    return {
+      error: 'EP_DISCONNECTED',
+      playerDisconnected,
+      finished: this.finished,
+    };
   }
 
   playerTurn(turn) {

@@ -11,9 +11,18 @@ class Room {
     return this.players.find(p => !p.isEqual(player));
   }
 
-  joinPlayer(playerToJoin, socketId) {
-    const player = new Player({ nickname: playerToJoin, socketId });
+  setOtherPlayer() {
+    this.playerInTurn = this.playerInTurn === 0 ? 1 : 0;
+  }
 
+  reduceTurn() {
+    this.turns -= 1;
+    if (this.turns <= 0) {
+      this.finished = true;
+    }
+  }
+
+  joinPlayer(player) {
     if (this.players.find(p => p.isEqual(player))) {
       player.nickname += '(2)';
     }
@@ -24,11 +33,21 @@ class Room {
     return player;
   }
 
+  readyPlayer(player) {
+    this.players.find(p => p.isEqual(player)).ready = true;
+
+    return this.players[0].ready && this.players[1].ready
+      ? this.beginGame()
+      : false;
+  }
+
   beginGame() {
     this.playerInTurn = (Math.random() * 2) | 0;
     this.board = new Board([0, 0, 1000, 1000]);
+    this.turns = 20;
+    this.finished = false;
 
-    return this.players[this.playerInTurn];
+    return this.returnData();
   }
 
   disconnectPlayer(socketId) {
@@ -37,10 +56,18 @@ class Room {
   }
 
   playerTurn(turn) {
+    // If finished, error
+    if (this.finished) {
+      return { error: 'ER_NOT_GAME' };
+    }
+
     // It's not their turn
     if (!this.players[this.playerInTurn].isEqual(turn.player)) {
       return { error: 'EP_NOT_TURN' };
     }
+
+    this.setOtherPlayer();
+    this.reduceTurn();
 
     if (turn.type === 'placement') {
       return this.sitePlacement(turn);
@@ -66,11 +93,7 @@ class Room {
     // Recalculate Voronoi
     this.board.recalcVoronoi(this.players);
 
-    return {
-      player1: this.players[0],
-      player2: this.players[1],
-      board: this.board.toJson(),
-    };
+    return this.returnData({ siteCreated: { type: site, location } });
   }
 
   siteAttack({ attackedLocation, attackingLocation, player: attacker }) {
@@ -96,7 +119,7 @@ class Room {
 
     attackedSite.reduceHealth(attackingSite.attack);
 
-    let destroyed = null;
+    let siteDestroyed = null;
 
     if (attackedSite.isDestroyed) {
       // Remove site
@@ -105,14 +128,21 @@ class Room {
       // Recalculate Voronoi
       this.board.recalcVoronoi(this.players);
 
-      destroyed = attackedSite.toJson();
+      siteDestroyed = attackedSite.toJson();
     }
 
+    return this.returnData({ siteDestroyed });
+  }
+
+  returnData(customData) {
     return {
       player1: this.players[0],
       player2: this.players[1],
       board: this.board.toJson(),
-      destroyed,
+      playerInTurn: this.players[this.playerInTurn],
+      turns: this.turns,
+      finished: this.finished,
+      ...customData,
     };
   }
 }

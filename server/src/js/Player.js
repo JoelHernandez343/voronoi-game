@@ -1,5 +1,5 @@
 class Player {
-  constructor({ nickname, socketId, sites, area }) {
+  constructor({ nickname, socketId, sites, area, percentage }) {
     this.nickname = nickname;
     this.socketId = socketId;
     this.sites = sites ?? {
@@ -9,6 +9,8 @@ class Player {
       catapult: 5,
     };
     this.area = area ?? 0;
+    this.percentage = percentage ?? 0.0;
+    this.ready = false;
   }
 
   checkSite(type) {

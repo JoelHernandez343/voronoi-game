@@ -8,14 +8,24 @@ class Board {
     this.totalArea = bounds[2] * bounds[3];
   }
 
-  isInQuarantine(location) {
+  isInQuarantineZone(location) {
     return this.sites.find(site => site.isInQuarantineZone(location));
   }
 
-  isInAttackZone(location) {}
+  getSite(location, owner) {
+    return this.sites.find(
+      site => site.owner.isEqual(owner) && site.isSameLocation(location)
+    );
+  }
 
-  addSite(site, player, location) {
-    this.sites.push(Site.build(site, player, location));
+  addSite(type, location, player) {
+    this.sites.push(new Site(type, player, location));
+  }
+
+  removeSite(location) {
+    const index = this.sites.findIndex(site => site.isSameLocation(location));
+
+    this.sites.splice(index, 1);
   }
 
   recalcVoronoi(players) {
@@ -27,6 +37,14 @@ class Board {
       site.calcArea(voronoi, this.sites.length);
       site.owner.area += site.area;
     });
+  }
+
+  toJson() {
+    return {
+      bounds: this.bounds,
+      totalArea: this.totalArea,
+      sites: this.sites.map(site => site.toJson()),
+    };
   }
 }
 

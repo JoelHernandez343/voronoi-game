@@ -1,27 +1,33 @@
 class Player {
-  constructor({ nickname, socketId }) {
+  constructor({ nickname, socketId, sites, area }) {
     this.nickname = nickname;
     this.socketId = socketId;
-    this.sites = {
+    this.sites = sites ?? {
       castle: 1,
       tower: 7,
       barrack: 10,
       catapult: 5,
     };
-    this.area = 0;
+    this.area = area ?? 0;
   }
 
-  checkSite(site) {
-    return this.sites[site] > 0;
+  checkSite(type) {
+    return this.sites[type] > 0;
   }
 
-  consumeSite(site) {
-    if (this.sites[site] === 0) {
+  consumeSite(type) {
+    if (this.sites[type] === 0) {
       return false;
     }
 
-    this.sites[site] -= 1;
+    this.sites[type] -= 1;
     return true;
+  }
+
+  isEqual(player) {
+    return (
+      this.nickname === player.nickname && this.socketId === player.socketId
+    );
   }
 }
 

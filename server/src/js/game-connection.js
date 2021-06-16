@@ -88,6 +88,9 @@ const playerTurn = ({ data, rooms, io, socket }) => {
 
 const disconnect = ({ rooms, socket }) => {
   console.log('User has disconnected!');
+  if (!checkIfJoined(socket)) {
+    return;
+  }
 
   const room = getCurrentRoom(socket);
   const error = rooms[room].disconnectPlayer(socket.id);

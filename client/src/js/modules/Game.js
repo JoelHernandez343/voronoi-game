@@ -4,6 +4,7 @@ class Game {
   constructor() {
     this.connect();
     this.history = null;
+    this.states = null;
   }
 
   connect() {
@@ -18,8 +19,15 @@ class Game {
     this.socket.on('error', data => console.log(data));
   }
 
-  waiting(data) {
-    console.log('We are waiting', data);
+  waiting({ room }) {
+    this.room = room;
+
+    console.log(this.states);
+
+    const [, setCode] = this.states['code'];
+
+    setCode(room);
+
     this.history.push('/loading');
   }
 

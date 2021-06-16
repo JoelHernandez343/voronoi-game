@@ -2,6 +2,7 @@ import '../css/App.css';
 import '../css/fonts.css';
 
 import { Switch, Route, useLocation, useHistory } from 'react-router-dom';
+import { useState } from 'react';
 
 // Components
 import Home from './pages/home/Home.js';
@@ -17,7 +18,15 @@ const game = new Game();
 
 const App = () => {
   const history = useHistory();
+
+  const [code, setCode] = useState('YYYY');
+
+  const states = {
+    code: [code, setCode],
+  };
+
   game.history = history;
+  game.states = states;
 
   return (
     <div>
@@ -33,7 +42,7 @@ const App = () => {
           <p>This is about</p>
         </Route>
         <Route exact path="/loading">
-          <Loading />
+          <Loading code={code} />
         </Route>
         <Route path="/*">
           <p>This is 404</p>

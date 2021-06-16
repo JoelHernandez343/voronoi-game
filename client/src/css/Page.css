@@ -1,4 +1,4 @@
-/* .loading-bg {
+.page-bg {
   background: rgb(0, 212, 255);
   background: linear-gradient(
     117deg,
@@ -10,22 +10,7 @@
   height: 100vh;
 }
 
-.loading-modal {
+.page-modal {
   background: #1d1e22;
   box-shadow: 0 4px 30px rgb(0 0 0 / 50%);
-} */
-
-.loading-anim {
-  animation-name: loading-anim;
-  animation-duration: 1000ms;
-  animation-iteration-count: infinite;
-}
-
-@keyframes loading-anim {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }

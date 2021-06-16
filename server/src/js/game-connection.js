@@ -7,7 +7,7 @@ const bindGameEvents = (io, socket, rooms) => {
   socket.on('joinToGame', data => joinToGame({ data, socket, io, rooms }));
   socket.on('ready', data => ready({ data, socket, rooms, io }));
   socket.on('playerTurn', data => playerTurn({ data, socket, rooms, io }));
-  socket.on('disconnect', () => disconnect({ rooms, socket }));
+  socket.on('disconnect', () => disconnect({ rooms, socket, io }));
 };
 
 const createGame = ({ data, socket, io, rooms }) => {
@@ -16,7 +16,10 @@ const createGame = ({ data, socket, io, rooms }) => {
   const room = createRoomNumber(io);
 
   socket.join(room);
-  rooms[room] = new Room();
+
+  console.log(data);
+
+  rooms[room] = new Room(room);
   const player = rooms[room].joinPlayer(
     new Player({ nickname: data.nickname, socketId: socket.id })
   );
@@ -86,18 +89,21 @@ const playerTurn = ({ data, rooms, io, socket }) => {
   }
 };
 
-const disconnect = ({ rooms, socket }) => {
-  console.log('User has disconnected!');
-  if (!checkIfJoined(socket)) {
+const disconnect = ({ rooms, socket, io }) => {
+  console.log('User has disconnected!', socket.id);
+
+  const room = getSocketRoom(socket, rooms);
+
+  if (!room) {
     return;
   }
 
-  const room = getCurrentRoom(socket);
   const error = rooms[room].disconnectPlayer(socket.id);
 
   io.sockets.in(room).emit('error', error);
 
   deleteRoom(rooms, room, io);
+  console.log('Cleaned up room');
 };
 
 const checkIfJoined = socket => {
@@ -114,8 +120,15 @@ const checkIfJoined = socket => {
   return true;
 };
 
-const getCurrentRoom = socket => {
-  return Array.from(socket.rooms.keys()).filter(key => key.length === 4)[0];
+const getCurrentRoom = socket =>
+  Array.from(socket.rooms.keys()).filter(key => key.length === 4)[0];
+
+const getSocketRoom = (socket, rooms) => {
+  const entrie = Object.entries(rooms).find(entry =>
+    entry[1].players.find(p => p.socketId === socket.id)
+  );
+
+  return entrie ? entrie[0] : undefined;
 };
 
 const createRoomNumber = io => {

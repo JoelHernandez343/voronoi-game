@@ -1,7 +1,8 @@
 import { Board } from './Board.js';
 
 class Room {
-  constructor() {
+  constructor(id) {
+    this.id = id;
     this.full = false;
     this.players = [];
   }

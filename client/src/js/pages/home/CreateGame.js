@@ -11,7 +11,9 @@ const CreateGame = ({ game }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const createGame = () => {
-    game.createGame(formData);
+    if (formData.nickname !== '') {
+      game.createGame(formData);
+    }
   };
 
   return (

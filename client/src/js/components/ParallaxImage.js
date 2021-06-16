@@ -33,6 +33,11 @@ const createTrackingMove = (factor, className) => e => {
   const movable = docquery(`.${className}.movable`);
   const reference = docquery(`.${className}.reference`);
 
+  if (!movable || !reference) {
+    console.log('Fuck u React');
+    return;
+  }
+
   const { x, y, height, width } = reference.getBoundingClientRect();
 
   const cx = width / 2 + x;

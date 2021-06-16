@@ -9,7 +9,7 @@ const sites = {
 const attack = [20, 15, 5, 10];
 const health = [100, 50, 25, 15];
 const attackRadius = [20, 50, 30, 60];
-const quarantineRadius = [30, 15, 10, 10];
+const quarantineRadius = [150, 75, 50, 50];
 
 class Site {
   constructor(type, owner, location) {
@@ -69,8 +69,9 @@ class Site {
       attackRadius: this.attackRadius,
       quarantineRadius: this.quarantineRadius,
       owner: {
-        nickname: this.nickname,
-        socketId: this.socketId,
+        nickname: this.owner.nickname,
+        socketId: this.owner.socketId,
+        color: this.owner.color,
       },
     };
   }

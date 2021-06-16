@@ -1,5 +1,10 @@
 import { Board } from './Board.js';
 
+const colors = {
+  red: '#C7003922',
+  blue: '#3049CB22',
+};
+
 class Room {
   constructor(id) {
     this.id = id;
@@ -27,14 +32,14 @@ class Room {
   }
 
   joinPlayer(player) {
-    if (this.players.find(p => p.isEqual(player))) {
+    if (this.players.find(p => p.nickname === player.nickname)) {
       player.nickname += '(2)';
     }
 
     this.players.push(player);
     this.full = this.players.length === 2;
 
-    return player;
+    return this.players;
   }
 
   readyPlayer(player) {
@@ -46,10 +51,17 @@ class Room {
   }
 
   beginGame() {
-    this.playerInTurn = (Math.random() * 2) | 0;
-    this.board = new Board([0, 0, 1000, 1000]);
+    const random = (Math.random() * 2) | 0;
+
+    this.players[0].color = random === 0 ? colors.blue : colors.red;
+    this.players[1].color = random === 0 ? colors.red : colors.blue;
+
+    this.playerInTurn = random;
+    this.board = new Board([0, 0, 800, 500]);
     this.turns = 20;
     this.finished = false;
+
+    console.log(this.playerInTurn);
 
     return this.returnData();
   }
@@ -108,6 +120,9 @@ class Room {
       return { error: 'ES_Q_ZONE' };
     }
 
+    // Consume site
+    currentPlayer.consumeSite(site);
+
     // Add the site in sites
     this.board.addSite(site, location, currentPlayer);
 
@@ -159,8 +174,7 @@ class Room {
 
   returnData(customData) {
     return {
-      player1: this.players[0],
-      player2: this.players[1],
+      players: this.players,
       board: this.board.toJson(),
       playerInTurn: this.players[this.playerInTurn],
       turns: this.turns,

@@ -17,8 +17,6 @@ const createGame = ({ data, socket, io, rooms }) => {
 
   socket.join(room);
 
-  console.log(data);
-
   rooms[room] = new Room(room);
   const player = rooms[room].joinPlayer(
     new Player({ nickname: data.nickname, socketId: socket.id })
@@ -41,10 +39,11 @@ const joinToGame = ({ data, io, socket, rooms }) => {
   }
 
   socket.join(data.room);
-  const player = rooms[data.room].joinPlayer(
+  const players = rooms[data.room].joinPlayer(
     new Player({ nickname: data.nickname, socketId: socket.id })
   );
-  io.sockets.in(data.room).emit('playerJoinedRoom', { player });
+
+  io.sockets.in(data.room).emit('playerJoinedRoom', { players });
 };
 
 const ready = ({ data, rooms, socket, io }) => {
@@ -56,10 +55,9 @@ const ready = ({ data, rooms, socket, io }) => {
   };
 
   const firstState = rooms[room].readyPlayer(player);
-  io.sockets.in(room).emit('playerReady', { player });
 
   if (firstState) {
-    io.sockets.in(room).emit('waitingForTurn', firstState);
+    io.sockets.in(room).emit('beginGame', firstState);
   }
 };
 

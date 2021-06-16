@@ -1,16 +1,17 @@
 class Player {
-  constructor({ nickname, socketId, sites, area, percentage }) {
+  constructor({ nickname, socketId, sites, area, percentage, color }) {
     this.nickname = nickname;
     this.socketId = socketId;
     this.sites = sites ?? {
       castle: 1,
-      tower: 7,
-      barrack: 10,
-      catapult: 5,
+      tower: 5,
+      barrack: 5,
+      catapult: 2,
     };
     this.area = area ?? 0;
     this.percentage = percentage ?? 0.0;
     this.ready = false;
+    this.color = color ?? '#C70039';
   }
 
   checkSite(type) {

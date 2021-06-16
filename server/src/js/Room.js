@@ -1,10 +1,13 @@
-import { Player } from './Player.js';
 import { Board } from './Board.js';
 
 class Room {
   constructor() {
     this.full = false;
     this.players = [];
+  }
+
+  getPlayer(player) {
+    return this.players.find(p => p.isEqual(player));
   }
 
   getOtherPlayer(player) {
@@ -65,6 +68,11 @@ class Room {
   }
 
   playerTurn(turn) {
+    // If not all players ready, error
+    if (!this.players[0].ready || !this.players[1].ready) {
+      return { error: 'EP_NOT_READY' };
+    }
+
     // If finished, error
     if (this.finished) {
       return { error: 'ER_NOT_GAME' };
@@ -85,7 +93,10 @@ class Room {
     }
   }
 
-  sitePlacement({ site, location, player: currentPlayer }) {
+  sitePlacement({ site, location, player }) {
+    // Get instance of player
+    const currentPlayer = this.getPlayer(player);
+
     // Check if the player still has sites available of the type
     if (!currentPlayer.checkSite(site)) {
       return { error: 'EP_NOT_SITE' };
@@ -105,7 +116,9 @@ class Room {
     return this.returnData({ siteCreated: { type: site, location } });
   }
 
-  siteAttack({ attackedLocation, attackingLocation, player: attacker }) {
+  siteAttack({ attackedLocation, attackingLocation, player }) {
+    // Get instances of players
+    const attacker = this.getPlayer(player);
     const attackedPlayer = this.getOtherPlayer(attacker);
 
     const attackingSite = this.board.getSite(attackingLocation, attacker);

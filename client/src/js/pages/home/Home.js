@@ -8,7 +8,7 @@ import CreateGame from './CreateGame.js';
 import HomeBg from './HomeBg.js';
 import Button from './../../components/Button.js';
 
-const Home = () => {
+const Home = ({ game }) => {
   const [section, setSection] = useState('content');
   const [movingRight, setMovingRight] = useState(false);
 
@@ -49,9 +49,9 @@ const Home = () => {
                   Regresar
                 </Button>
                 {section === 'create' ? (
-                  <CreateGame states={states} />
+                  <CreateGame states={states} game={game} />
                 ) : section === 'join' ? (
-                  <JoinGame states={states} />
+                  <JoinGame states={states} game={game} />
                 ) : null}
               </div>
             </div>

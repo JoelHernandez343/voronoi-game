@@ -1,7 +1,7 @@
 import Input from '../../components/Input.js';
 import Button from '../../components/Button.js';
 
-const JoinGame = () => {
+const JoinGame = ({ game }) => {
   return (
     <div className="mt-4">
       <h1 className="text-2xl font-semibold">Unirse a una partida</h1>

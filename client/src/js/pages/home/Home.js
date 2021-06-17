@@ -27,6 +27,7 @@ const Home = ({ game }) => {
 
           <h2 className="text-3xl font-bold text-center">Conquista el</h2>
           <h1 className="text-8xl font-bold -ml-1.5 mb-3 text-center">Mundo</h1>
+          <h3 className="text-xl text-center">Pre-Alpha-v0.5</h3>
 
           <p className="leading-relaxed font-semibold mb-4 text">
             <strong>Conquista el mundo</strong> es un juego de estrategia

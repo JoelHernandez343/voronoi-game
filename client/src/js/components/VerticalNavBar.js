@@ -20,7 +20,7 @@ const VerticalNavBar = ({ states }) => {
           title="Home"
           onClick={onClick}
         />
-        <VerticalLink
+        {/* <VerticalLink
           pathname={pathname}
           route="/rules"
           icon="gavel"
@@ -33,7 +33,7 @@ const VerticalNavBar = ({ states }) => {
           icon="info"
           title="Sobre"
           onClick={onClick}
-        />
+        /> */}
 
         <li className="vnavb-link flex border-t">
           <a

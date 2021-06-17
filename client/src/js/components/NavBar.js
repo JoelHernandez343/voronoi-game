@@ -10,12 +10,12 @@ const NavBar = () => {
         <li className={pathname === '/' ? 'border-b-2' : ''}>
           <Link to="/">Home</Link>
         </li>
-        <li className={pathname === '/rules' ? 'border-b-2' : ''}>
+        {/* <li className={pathname === '/rules' ? 'border-b-2' : ''}>
           <Link to="/rules">Reglas del juego</Link>
         </li>
         <li className={pathname === '/about' ? 'border-b-2' : ''}>
           <Link to="/about">Sobre</Link>
-        </li>
+        </li> */}
         <li>
           <a
             href="https://github.com/JoelHernandez343/voronoi-game"

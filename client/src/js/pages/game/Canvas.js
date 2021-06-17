@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 
-const Canvas = ({ states, game }) => {
+const Canvas = ({ states, game, interfactive = true }) => {
   const [board] = states.board;
   const [status, setStatus] = states.status;
   const [localPlayer] = states.localPlayer;
@@ -18,6 +18,10 @@ const Canvas = ({ states, game }) => {
   }, [board]);
 
   const getLocation = e => {
+    if (!interfactive) {
+      return;
+    }
+
     const canvas = canvasRef?.current;
 
     if (!canvas) {

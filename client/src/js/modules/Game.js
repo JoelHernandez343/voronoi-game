@@ -98,7 +98,12 @@ class Game {
   }
 
   finishedGame(data) {
-    console.log(data);
+    console.log(this.states);
+
+    const [, setWinner] = this.states.winner;
+
+    setWinner(data.winner);
+
     this.setNewData(data);
     this.history.push('/endgame');
   }

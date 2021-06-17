@@ -37,6 +37,7 @@ const App = () => {
     },
     area: 0,
     percentage: 0,
+    color: '',
   });
 
   const [opponentPlayer, setOpponentPlayer] = useState({
@@ -50,6 +51,7 @@ const App = () => {
     },
     area: 0,
     percentage: 0,
+    color: '',
   });
 
   const [status, setStatus] = useState({ status: 'waiting' });
@@ -66,15 +68,29 @@ const App = () => {
 
   const [finished, setFinished] = useState(false);
 
+  const [winner, setWinner] = useState({
+    nickname: 'UserPlaceholder1',
+    socketId: 'iouVSDFGDSfDs',
+    sites: {
+      castle: 1,
+      tower: 7,
+      barrack: 10,
+      catapult: 5,
+    },
+    area: 0,
+    percentage: 0,
+  });
+
   const states = {
     code: [code, setCode],
     board: [board, setBoard],
     status: [status, setStatus],
+    winner: [winner, setWinner],
+    finished: [finished, setFinished],
     localPlayer: [localPlayer, setLocalPlayer],
+    turnsNumber: [turnsNumber, setTurnsNumber],
     playerInTurn: [playerInTurn, setPlayerInTurn],
     opponentPlayer: [opponentPlayer, setOpponentPlayer],
-    turnsNumber: [turnsNumber, setTurnsNumber],
-    finished: [finished, setFinished],
   };
 
   game.history = history;
@@ -100,7 +116,7 @@ const App = () => {
           <GamePage game={game} states={states} />
         </Route>
         <Route exact path="/endgame">
-          <EndGame game={game} states={states} />
+          <EndGame states={states} />
         </Route>
         <Route path="/*">
           <p>This is 404</p>

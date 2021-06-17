@@ -7,12 +7,14 @@ const PlayerSide = ({ player, turn, states }) => {
       <h2 className="font-light text-xs mb-3">Conexión {player.socketId}</h2>
 
       <div className="flex flex-col justify-center items-center">
-        <h2 className="font-semibold text-lg">{player.area | 0}</h2>
+        <h2 className="font-semibold text-lg text-yellow-400">
+          {player.area | 0}
+        </h2>
         <h3 className="mb-3">Área conquistada</h3>
       </div>
 
       <div className="flex flex-col justify-center items-center">
-        <h2 className="font-semibold text-lg">
+        <h2 className="font-semibold text-lg text-yellow-400">
           {parseFloat(`${player.percentage}`).toFixed(1)}%
         </h2>
         <h3 className="">Porcentaje</h3>

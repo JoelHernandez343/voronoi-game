@@ -27,7 +27,20 @@ const Home = ({ game }) => {
 
           <h2 className="text-3xl font-bold text-center">Conquista el</h2>
           <h1 className="text-8xl font-bold -ml-1.5 mb-3 text-center">Mundo</h1>
-          <h3 className="text-xl text-center">Pre-Alpha-v0.5</h3>
+
+          <div className="">
+            <h3 className="text-xl text-center">Pre-Alpha-v0.5</h3>
+            <h3 className="text-xl font-black text-blue-800 text-center">
+              <a
+                href="https://github.com/JoelHernandez343/voronoi-game"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Fork me on github"
+              >
+                Por Joel Harim Hernández Javier
+              </a>
+            </h3>
+          </div>
 
           <p className="leading-relaxed font-semibold mb-4 text">
             <strong>Conquista el mundo</strong> es un juego de estrategia

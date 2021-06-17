@@ -129,7 +129,11 @@ class Room {
     // Recalculate Voronoi
     this.board.recalcVoronoi(this.players);
 
-    return this.returnData({ siteCreated: { type: site, location } });
+    const siteCreated = { type: site, location };
+
+    return this.finished
+      ? this.returnData({ siteCreated, winner: this.calcWinner() })
+      : this.returnData({ siteCreated });
   }
 
   siteAttack({ attackedLocation, attackingLocation, player }) {
@@ -169,7 +173,18 @@ class Room {
       siteDestroyed = attackedSite.toJson();
     }
 
-    return this.returnData({ siteDestroyed });
+    return this.finished
+      ? this.returnData({ siteDestroyed, winner: this.calcWinner() })
+      : this.returnData({ siteDestroyed });
+  }
+
+  calcWinner() {
+    const maxArea = this.players.reduce(
+      (maxArea, p) => (p.area > maxArea ? p.area : maxArea),
+      -1
+    );
+
+    return this.players.find(p => p.area === maxArea);
   }
 
   returnData(customData) {
